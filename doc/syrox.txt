@@ -2,17 +2,21 @@
 
 SETUP                                                        *syrox-setup*
 
-Build the server from the Syrox repository:
+From ~/Work/Ryro, build the server and clone this client beside it:
 >
+  git clone https://github.com/ryro-hq/srx.git
+  cd srx
   cargo build --locked --release -p syrox --bin srx
+  cd ..
+  git clone https://github.com/ryro-hq/srx.nvim.git
 <
 Add the runtime directory to runtimepath before calling setup in init.lua:
 >
-  local syrox = vim.fn.expand("~/Work/Ryro/syrox")
-  vim.opt.runtimepath:prepend(vim.fn.expand("~/Work/Ryro/syrox.nvim"))
+  local core = vim.fn.expand("~/Work/Ryro/srx")
+  vim.opt.runtimepath:prepend(vim.fn.expand("~/Work/Ryro/srx.nvim"))
   require("syrox").setup({
-    cmd = { syrox .. "/target/release/srx", "lsp" },
-    standard_library_root = syrox .. "/std",
+    cmd = { core .. "/target/release/srx", "lsp" },
+    standard_library_root = core .. "/std",
   })
 <
 The .srx extension is detected as filetype=syrox. Syntax highlighting uses the
@@ -23,7 +27,7 @@ Syrox.lock, main.srx or .git. The standard library is bundled in the server.
 For lazy.nvim, install from the standalone repository:
 >
   {
-    "ryro-hq/syrox.nvim",
+    "ryro-hq/srx.nvim",
     lazy = false,
     opts = { cmd = { "srx", "lsp" } },
     config = function(_, opts) require("syrox").setup(opts) end,
@@ -82,7 +86,7 @@ it does not authenticate these disk sources for package execution or update Lock
 TESTING                                                      *syrox-test*
 >
   SRX_BIN=/absolute/path/to/srx nvim --headless -u NONE -l tests/smoke.lua
-  SRX_BIN=/absolute/path/to/srx SRX_STD_DIR=/path/to/syrox/std nvim --headless -u NONE -l tests/std.lua
+  SRX_BIN=/path/to/srx-binary SRX_STD_DIR=/path/to/srx/std nvim --headless -u NONE -l tests/std.lua
 <
 Run from this plugin's root with a server supporting srx lsp. SRX_BIN defaults to
 srx on PATH. SRX_STD_DIR is required for the std authoring test. These tests use

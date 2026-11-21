@@ -1,4 +1,4 @@
--- SRX_BIN=/path/to/srx SRX_STD_DIR=/path/to/syrox/std nvim --headless -u NONE -l tests/std.lua
+-- SRX_BIN=/path/to/srx-binary SRX_STD_DIR=/path/to/srx/std nvim --headless -u NONE -l tests/std.lua
 local runtime = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h:h")
 local root = vim.env.SRX_STD_DIR
 local function run()
