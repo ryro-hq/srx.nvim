@@ -1,13 +1,13 @@
-syrox.nvim
+srx.nvim
 
 Neovim 0.11+ client for Syrox (.srx), using the external srx lsp server.
-Source: https://github.com/ryro-hq/syrox.nvim
-Language server: https://github.com/ryro-hq/syrox
+Source: https://github.com/ryro-hq/srx.nvim
+Language server: https://github.com/ryro-hq/srx
 
 Install with lazy.nvim:
 
   {
-    "ryro-hq/syrox.nvim",
+    "ryro-hq/srx.nvim",
     lazy = false,
     opts = { cmd = { "srx", "lsp" } },
     config = function(_, opts) require("syrox").setup(opts) end,
@@ -24,7 +24,7 @@ Set keymaps=false to keep your own buffer mappings. See :help syrox-setup.
 Tests from this repository:
   nvim --headless -u NONE -l tests/check.lua
   SRX_BIN=/path/to/srx nvim --headless -u NONE -l tests/smoke.lua
-  SRX_BIN=/path/to/srx SRX_STD_DIR=/path/to/syrox/std nvim --headless -u NONE -l tests/std.lua
+  SRX_BIN=/path/to/srx-binary SRX_STD_DIR=/path/to/srx/std nvim --headless -u NONE -l tests/std.lua
 
 Each editor client has its own repository and release cycle. Language semantics,
 type checking and ownership analysis remain in the Syrox server.
